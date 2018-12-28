@@ -1,0 +1,12 @@
+Notification bagi mentor jika request nya di approve oleh admin
+Notification bagi admin jika ada mentor submit request untuk mentoring
+Pembatas route by role ( Middleware )
+List user yang mengikuti mentoring yang di buat oleh mentor user
+Upload file bagi mentor yang mengajukan request
+Function approve bagi admin ke request yang di ajukan mentor
+Flow user join mentor yang available
+Upload profile image bagi user
+User hanya boleh ganti password sendiri
+
+
+Student at least ad major biar bisa ada pengelompokan mentoring bagi jurusan tertentu

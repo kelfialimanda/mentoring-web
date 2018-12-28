@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class Target extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -18,8 +18,8 @@ class Role extends Model
      /**
      * Get the role associated with the user.
      */
-    public function user()
+    public function schedule()
     {
-        return $this->hasOne('App\User');
+        return $this->hasMany('App\Schedule');
     }
 }

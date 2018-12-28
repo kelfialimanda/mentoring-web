@@ -28,11 +28,20 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-     /**
-     * Get the role associated with the user.
+    
+    /**
+     * Get the user that owns the phone.
      */
     public function role()
     {
-        return $this->hasOne('App\Role');
+        return $this->belongsTo('App\Role');
+    }
+
+     /**
+     * Get the role associated with the user.
+     */
+    public function schedule()
+    {
+        return $this->hasMany('App\Schedule');
     }
 }

@@ -15,8 +15,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::all();
-        return view('admin.role', ['roles' => $roles]);
+        $roles = Role::where('name', '!=', 'admin')->get();
+        return view('admin.role.list', ['roles' => $roles]);
     }
 
     /**
@@ -38,13 +38,13 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:posts|max:255'
+            'name' => 'required|unique:roles|max:255'
         ]);
 
         $new_role = new Role();
         $new_role->name = $request->name;
         $new_role->save();
-        return redirect()->route('role.index')->with('alert-success','Role added successfully!');
+        return redirect()->route('admin.role.list')->with('alert-success','Role added successfully!');
     }
 
     /**
@@ -57,12 +57,12 @@ class RoleController extends Controller
     public function update(Request $request, Role $role)
     {
         $request->validate([
-            'name' => 'required|unique:posts|max:255'
+            'name' => 'required|unique:roles|max:255'
         ]);
-        $data = ModelKontak::where('id', $role->id)->first();
+        $data = Role::where('id', $role->id)->first();
         $data->name = $request->name;
         $data->save();
-        return redirect()->route('role.index')->with('alert-success','Role successfully edited!');
+        return redirect()->route('admin.role.list')->with('alert-success','Role successfully edited!');
     }
 
     /**
@@ -73,8 +73,8 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        $data = ModelKontak::where('id', $role->id)->first();
+        $data = Role::where('id', $role->id)->first();
         $data->delete();
-        return redirect()->route('role.index')->with('alert-success','Role successfully deleted!');
+        return redirect()->route('admin.role.list')->with('alert-success','Role successfully deleted!');
     }
 }

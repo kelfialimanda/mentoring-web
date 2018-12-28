@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class Difficulty extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,14 +12,14 @@ class Role extends Model
      * @var array
      */
     protected $fillable = [
-        'name'
+        'name', 'color'
     ];
 
      /**
      * Get the role associated with the user.
      */
-    public function user()
+    public function schedule()
     {
-        return $this->hasOne('App\User');
+        return $this->hasMany('App\Schedule');
     }
 }

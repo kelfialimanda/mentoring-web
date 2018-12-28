@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class RolesTableSeeder extends Seeder
+class DifficultiesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,18 +11,21 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('roles')->insert([
-            'name' => 'admin',
+        DB::table('difficulties')->insert([
+        	'name' => 'Easy',
+            'color' => 'green',
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s"),
         ]);
-        DB::table('roles')->insert([
-            'name' => 'mentor',
+        DB::table('difficulties')->insert([
+        	'name' => 'Medium',
+            'color' => 'yellow',
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s"),
         ]);
-        DB::table('roles')->insert([
-            'name' => 'student',
+        DB::table('difficulties')->insert([
+        	'name' => 'Hard',
+            'color' => 'red',
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s"),
         ]);

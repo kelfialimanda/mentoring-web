@@ -23,11 +23,16 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        if ( $user->role->id == 1) {// do your margic here
-            return redirect('/admin/');
+        if ( $user->role->id == 1)
+        {
+            return redirect('/admin');
+        }
+        else if ( $user->role->id == 2)
+        {
+            return redirect('/mentor');
         }
 
-        return redirect('/');
+        return redirect('/student');
     }
 
     /**

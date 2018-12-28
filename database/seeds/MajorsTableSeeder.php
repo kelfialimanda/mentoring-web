@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class UsersTableSeeder extends Seeder
+class MajorsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,12 +11,9 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            'name' => 'admin',
-            'npm' => '',
-            'email' => 'admin@admin.com',
-            'password' => bcrypt('administrator'),
-            'role_id' => 1,
+        DB::table('majors')->insert([
+        	'code' => 31,
+            'name' => 'Sistem Informasi',
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s"),
         ]);
