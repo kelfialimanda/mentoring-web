@@ -57,7 +57,7 @@
                                         <td>{{ $major->code }}</td>
                                         <td>{{ $major->name }}</td>
                                         <td>
-                                            <a href="">Edit</a> | <a href="">Delete</a>
+                                            <a href="/admin/majors/form/{{ $major->id }}">Edit</a>
                                         </td>
                                     </tr>
                                 @endforeach

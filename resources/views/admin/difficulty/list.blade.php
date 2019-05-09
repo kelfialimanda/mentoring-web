@@ -57,7 +57,7 @@
                                         <td>{{ $difficulty->name }}</td>
                                         <td>{{ $difficulty->color }}</td>
                                         <td>
-                                            <a href="">Edit</a> | <a href="">Delete</a>
+                                        <a href="/admin/difficulties/form/{{$difficulty->id}}">Edit</a> | <a href="">Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach

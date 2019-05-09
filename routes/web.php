@@ -21,6 +21,8 @@ Route::prefix('admin')->group(function () {
 
 		Route::get('/roles/list', 'RoleController@index')->name('role.list');
 		Route::get('/roles/form', 'RoleController@form')->name('role.form');
+		Route::get('/roles/form/{id}', 'RoleController@edit')->name('role.edit');
+		Route::post('/roles/update', 'RoleController@update')->name('role.update');
 
 		Route::get('/users/list', 'UserController@index')->name('user.list');
 		Route::post('users/store', 'UserController@store')->name('user.store');

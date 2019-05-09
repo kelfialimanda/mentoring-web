@@ -56,10 +56,9 @@ class MajorController extends Controller
      * @param  \App\Major  $major
      * @return \Illuminate\Http\Response
      */
-    public function edit(Major $major)
+    public function edit($id)
     {
-        $major = Major::where('id', '=', $major->id)->first();
-
+        $major = Major::where('id', '=', $id)->first();
         return view('admin.major.form', ['major' => $major]);
     }
 
@@ -74,15 +73,15 @@ class MajorController extends Controller
     {
         $request->validate([
             'name' => 'required|max:255',
-            'code' => 'required|unique'
+            'code' => 'required|unique:majors,code,'.$request->id.',id'
         ]);
 
-        $data = Major::where('id', $major->id)->first();
+        $data = Major::where('id', $request->id)->first();
         $data->code = $request->code;
         $data->name = $request->name;
         $data->save();
 
-        return redirect()->route('major.list')->with('alert-success','User added successfully!');
+        return redirect()->route('major.list')->with('alert-success','Major added successfully!');
     }
 
     /**

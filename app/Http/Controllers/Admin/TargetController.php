@@ -55,9 +55,9 @@ class TargetController extends Controller
      * @param  \App\Target  $target
      * @return \Illuminate\Http\Response
      */
-    public function edit(Target $target)
+    public function edit($id)
     {
-        $target = Target::where('id', '=', $target->id)->first();
+        $target = Target::where('id', '=', $id)->first();
 
         return view('admin.target.form', ['target' => $target]);
     }
@@ -72,14 +72,14 @@ class TargetController extends Controller
     public function update(Request $request, Target $target)
     {
         $request->validate([
-            'name' => 'required|max:255',
+            'name' => 'required|max:255|unique:targets,name,'.$request->id.',id',
         ]);
 
-        $data = Target::where('id', $target->id)->first();
+        $data = Target::where('id', $request->id)->first();
         $data->name = $request->name;
         $data->save();
 
-        return redirect()->route('target.list')->with('alert-success','Target added successfully!');
+        return redirect()->route('target.list')->with('alert-success','Target updated successfully!');
     }
 
     /**

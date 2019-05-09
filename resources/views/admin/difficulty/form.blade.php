@@ -43,7 +43,7 @@
                             <div class="form-group">
                                 <div class="col-md-6">
                                     <label for="name" class="col-form-label">Name</label>
-                                    <input id="name" type="text" name="name" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" required autofocus>
+                                    <input id="name" type="text" name="name" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" value="{{ isset($difficulty->name) ? $difficulty->name : '' }}" required autofocus>
                                     @if ($errors->has('name'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('name') }}</strong>
@@ -54,7 +54,7 @@
                             <div class="form-group">
                                 <div class="col-md-6">
                                     <label for="color" class="col-form-label">Color</label>
-                                    <input id="color" type="text" name="color" class="form-control {{ $errors->has('color') ? ' is-invalid' : '' }}" required autofocus>
+                                    <input id="color" type="text" name="color" class="form-control {{ $errors->has('color') ? ' is-invalid' : '' }}" value="{{ isset($difficulty->color) ? $difficulty->color : '' }}" required autofocus>
                                     @if ($errors->has('color'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('color') }}</strong>
@@ -63,6 +63,10 @@
                                 </div>
                             </div>
                             
+                            @if ($difficulty->id)
+                                <input type="hidden" name="id" value="{{ $difficulty->id }}">
+                            @endif
+
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Submit') }}

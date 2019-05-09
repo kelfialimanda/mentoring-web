@@ -43,10 +43,10 @@
                             <div class="form-group">
                                 <div class="col-md-6">
                                     <label for="role" class="col-form-label">Role</label>
-                                    <select class="form-control" name="role_id" id="role">
+                                    <select class="form-control" name="role_id" id="role" value="{{ isset($user->id) ? $user->role_id : '' }}">
                                         @if (count($roles) > 0)
                                             @foreach ($roles as $role)
-                                                <option value="{{ $role->id }}">{{ ucfirst($role->name) }}</option>
+                                                <option value="{{ $role->id }}" {{ isset($user->id) ? $user->role_id == $role->id ? 'selected' : '' : '' }}>{{ ucfirst($role->name) }}</option>
                                             @endforeach
                                         @else
                                             <option value="" selected>You must fill roles first</option>
@@ -62,7 +62,7 @@
                             <div class="form-group npm-input" style="display: none;">
                                 <div class="col-md-6">
                                     <label for="npm" class="col-form-label">NPM</label>
-                                    <input id="npm" type="text" name="npm" class="form-control {{ $errors->has('npm') ? ' is-invalid' : '' }}">
+                                    <input id="npm" type="text" name="npm" class="form-control {{ $errors->has('npm') ? ' is-invalid' : '' }}" value="{{ isset($user->id) ? $user->npm : '' }}">
                                     @if ($errors->has('npm'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('npm') }}</strong>
@@ -73,7 +73,7 @@
                             <div class="form-group">
                                 <div class="col-md-6">
                                     <label for="name" class="col-form-label">Name</label>
-                                    <input id="name" type="text" name="name" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" required autofocus>
+                                    <input id="name" type="text" name="name" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" value="{{ isset($user->id) ? $user->name : '' }}" required autofocus>
                                     @if ($errors->has('name'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('name') }}</strong>
@@ -85,7 +85,7 @@
                                 <div class="col-md-6">
                                     <label for="email" class="col-form-label">{{ __('E-Mail Address') }}</label>
 
-                                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus autocomplete="off">
+                                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ isset($user->id) ? $user->email : '' }}" required autofocus autocomplete="off">
 
                                     @if ($errors->has('email'))
                                         <span class="invalid-feedback" role="alert">
@@ -97,7 +97,7 @@
                             <div class="form-group">
                                 <div class="col-md-6">
                                     <label for="password" class="col-form-label">Password</label>
-                                    <input id="password" type="password" name="password" class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}" required autofocus autocomplete="off">
+                                    <input id="password" type="password" name="password" class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}" autofocus autocomplete="off">
                                     @if ($errors->has('password'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('password') }}</strong>
@@ -105,11 +105,15 @@
                                     @endif
                                 </div>
                             </div>
-                            
+                            @if ($user->id)
+                                <input type="hidden" name="id" value="{{ $user->id }}">
+                            @endif
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Submit') }}
-                                </button>
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ __('Submit') }}
+                                    </button>
+                                </div>
                             </div>
                         {{ Form::close() }}
                     </div>

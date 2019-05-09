@@ -61,7 +61,7 @@
                                         <td>{{ $user->email }}</td>
                                         <td>{{ ucfirst($user->role->name) }}</td>
                                         <td>
-                                            <a href="">Edit</a> | <a href="">Delete</a>
+                                            <a href="/admin/users/form/{{$user->id}}">Edit</a> | <a href="">Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach

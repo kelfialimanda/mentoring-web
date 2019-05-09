@@ -49,7 +49,7 @@
                                         <th scope="row">{{ $loop->index + 1 }}</th>
                                         <td>{{ ucfirst($role->name) }}</td>
                                         <td>
-                                            <a href="">Edit</a>
+                                        <a href="/admin/roles/form/{{$role->id}}">Edit</a>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -48,6 +48,19 @@ class RoleController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Target  $target
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $role = Role::where('id', '=', $id)->first();
+
+        return view('admin.role.form', ['role' => $role]);
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -57,12 +70,14 @@ class RoleController extends Controller
     public function update(Request $request, Role $role)
     {
         $request->validate([
-            'name' => 'required|unique:roles|max:255'
+            'name' => 'required|max:255|unique:roles,name,'.$request->id.',id',
         ]);
-        $data = Role::where('id', $role->id)->first();
+
+        $data = Role::where('id', $request->id)->first();
         $data->name = $request->name;
         $data->save();
-        return redirect()->route('admin.role.list')->with('alert-success','Role successfully edited!');
+
+        return redirect()->route('role.list')->with('alert-success','Role updated successfully!');
     }
 
     /**

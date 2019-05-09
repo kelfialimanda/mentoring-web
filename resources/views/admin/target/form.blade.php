@@ -43,7 +43,7 @@
                             <div class="form-group">
                                 <div class="col-md-6">
                                     <label for="name" class="col-form-label">Name</label>
-                                    <input id="name" type="text" name="name" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" required autofocus>
+                                    <input id="name" type="text" name="name" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" value="{{ isset($target->name) ? $target->name : '' }}" required autofocus>
                                     @if ($errors->has('name'))
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('name') }}</strong>
@@ -51,7 +51,11 @@
                                     @endif
                                 </div>
                             </div>
-                            
+
+                            @if ($target->id)
+                                <input type="hidden" name="id" value="{{ $target->id }}">
+                            @endif
+
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Submit') }}

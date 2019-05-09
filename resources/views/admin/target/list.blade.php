@@ -55,7 +55,7 @@
                                         <th scope="row">{{ $loop->index + 1 }}</th>
                                         <td>{{ $target->name }}</td>
                                         <td>
-                                            <a href="">Edit</a> | <a href="">Delete</a>
+                                        <a href="/admin/targets/form/{{$target->id}}">Edit</a> | <a href="">Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach

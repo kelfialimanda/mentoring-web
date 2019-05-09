@@ -10,12 +10,12 @@
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="page-header" id="top">
                     <h2 class="pageheader-title">Roles </h2>
-                    <p class="pageheader-text">Add new role.</p>
+                    <p class="pageheader-text">Edit role.</p>
                     <div class="page-breadcrumb">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Roles</a></li>
-                                <li class="breadcrumb-item active"><a href="#" class="breadcrumb-link">List</a></li>
+                                <li class="breadcrumb-item active"><a href="#" class="breadcrumb-link">Form</a></li>
                             </ol>
                         </nav>
                     </div>
@@ -32,19 +32,34 @@
         <!-- ============================================================== -->
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <div class="section-block" id="basicform">
-                    <h3 class="section-title">Basic Form Elements</h3>
-                    <p>Use custom button styles for actions in forms, dialogs, and more with support for multiple sizes, states, and more.</p>
-                </div>
                 <div class="card">
-                    <h5 class="card-header">Basic Form</h5>
                     <div class="card-body">
-                        <form>
+                        @if ($role->id)
+                            {{ Form::model($role, array('route' => array('role.update', $role->id))) }}
+                        @endif
+                            @csrf
                             <div class="form-group">
-                                <label for="inputText3" class="col-form-label">Input Text</label>
-                                <input id="inputText3" type="text" class="form-control">
+                                <div class="col-md-6">
+                                    <label for="name" class="col-form-label">Name</label>
+                                    <input id="name" type="text" name="name" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" value="{{ isset($role->name) ? $role->name : '' }}" required autofocus>
+                                    @if ($errors->has('name'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('name') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
                             </div>
-                        </form>
+
+                            @if ($role->id)
+                                <input type="hidden" name="id" value="{{ $role->id }}">
+                            @endif
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Submit') }}
+                                </button>
+                            </div>
+                        {{ Form::close() }}
                     </div>
                 </div>
             </div>

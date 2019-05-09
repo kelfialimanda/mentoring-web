@@ -66,9 +66,9 @@ class DifficultyController extends Controller
      * @param  \App\Difficulty  $difficulty
      * @return \Illuminate\Http\Response
      */
-    public function edit(Difficulty $difficulty)
+    public function edit($id)
     {
-        $difficulty = Difficulty::where('id', '=', $difficulty->id)->first();
+        $difficulty = Difficulty::where('id', '=', $id)->first();
 
         return view('admin.difficulty.form', ['difficulty' => $difficulty]);
     }
@@ -83,14 +83,16 @@ class DifficultyController extends Controller
     public function update(Request $request, Difficulty $difficulty)
     {
         $request->validate([
-            'name' => 'required|max:255',
+            'name' => 'required|max:255|unique:difficulties,name,'.$request->id.',id',
         ]);
 
-        $data = Difficulty::where('id', $difficulty->id)->first();
+        $data = Difficulty::where('id', $request->id)->first();
         $data->name = $request->name;
+        $data->color = $request->color;
         $data->save();
 
-        return redirect()->route('difficulty.list')->with('alert-success','Difficulty added successfully!');
+        return redirect()->route('difficulty.list')->with('alert-success','Difficulty updated successfully!');
+
     }
 
     /**

@@ -82,19 +82,22 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required|max:50',
-            'email' => 'required|unique:users|max:255',
-            'password' => 'required|max:255',
+            'email' => 'required|unique:users,email,'. $request->id .',id|max:255',
+            // 'password' => 'required|max:255',
             'role_id' => 'required',
         ]);
 
-        $data = User::where('id', $user->id)->first();
+        $data = User::where('id', $request->id)->first();
         $data->npm = $request->npm;
         $data->name = $request->name;
         $data->email = $request->email;
-        $data->password = bcrypt($request->password);
+        if ($request->password != "" && count($request->password) > 0)
+        {
+            $data->password = bcrypt($request->password);
+        }
         $data->role_id = $request->role_id;
         $data->save();
-        return redirect()->route('admin.user.list')->with('alert-success','User successfully edited!');
+        return redirect()->route('user.list')->with('alert-success','User edited successfully!');
     }
 
     /**

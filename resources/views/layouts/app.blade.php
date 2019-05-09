@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <title>@yield('title') - Mentor Web</title>
+    <title>@yield('title') - Mentor Web</title> 
 </head>
 
 <body @if(Request::is('login/*')) class="auth-container" @endif>
